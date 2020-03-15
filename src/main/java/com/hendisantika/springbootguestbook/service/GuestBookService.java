@@ -24,4 +24,8 @@ public class GuestBookService {
     public List<GuestBook> findAllEntries() {
         return this.guestBookRepository.findAll();
     }
+
+    public GuestBook findGuestBookEntryById(Integer id) {
+        return this.guestBookRepository.findGuestBookEntryById(id);
+    }
 }
