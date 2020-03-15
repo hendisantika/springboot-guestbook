@@ -35,4 +35,10 @@ public class GuestBookRestController {
     public GuestBook findGuestBookEntryById(@PathVariable("id") Integer id) {
         return this.guestBookService.findGuestBookEntryById(id);
     }
+
+
+    @GetMapping("/user/{user}")
+    public List<GuestBook> findGuestBookEntriesByUser(@PathVariable("user") String user) {
+        return this.guestBookService.findGuestBookEntriesByUser(user);
+    }
 }
