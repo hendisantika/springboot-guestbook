@@ -4,6 +4,7 @@ import com.hendisantika.springbootguestbook.domain.GuestBook;
 import com.hendisantika.springbootguestbook.service.GuestBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,5 +29,10 @@ public class GuestBookRestController {
     @GetMapping("/comments")
     public List<GuestBook> testMapping() {
         return guestBookService.findAllEntries();
+    }
+
+    @GetMapping("/comment/{id}")
+    public GuestBook findGuestBookEntryById(@PathVariable("id") Integer id) {
+        return this.guestBookService.findGuestBookEntryById(id);
     }
 }
