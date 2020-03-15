@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Guestbook</title>
+
+    <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
+
+</head>
+<body>
+
+<img th:src="@{/images/logo.png}"/>
+
+<h1>Spring Guestbook</h1>
+
+<div th:if="${entries.isEmpty()}">
+    <p>There are no comments in the Guestbook. What a pity.</p>
+</div>
+
+<div th:if="${!entries.isEmpty()}">
+    <table>
+        <tr>
+            <th>User</th>
+            <th>Comment</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr th:each="entry: ${entries}">
+            <td th:text="${entry.user}"></td>
+            <td th:text="${entry.comment}"></td>
+            <td><a th:href="@{'/delete/' + ${entry.id}}">Delete</a></td>
+            <td><a th:href="@{'/update/' + ${entry.id}}">Update</a></td>
+        </tr>
+    </table>
+</div>
+
+<h2 th:text="${formHeader}"></h2>
+
+<form method="post" th:object="${newEntry}">
+    <label>User: </label>
+    <input size="32" th:field="*{user}" type="text"/>
+    <label>Comment: </label>
+    <input size="64" th:field="*{comment}" type="text"/>
+
+    <input type="submit" value="Submit"/>
+    <input type="reset" value="Reset"/>
+    <p class="warning" th:if="${#fields.hasErrors('user')}">User cannot be empty.</p>
+    <p class="warning" th:if="${#fields.hasErrors('comment')}">Comment cannot be empty.</p>
+</form>
+
+</body>
+</html>
