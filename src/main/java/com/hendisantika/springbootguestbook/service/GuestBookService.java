@@ -1,8 +1,11 @@
 package com.hendisantika.springbootguestbook.service;
 
+import com.hendisantika.springbootguestbook.domain.GuestBook;
 import com.hendisantika.springbootguestbook.repository.GuestBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -17,4 +20,8 @@ import org.springframework.stereotype.Service;
 public class GuestBookService {
     @Autowired
     private GuestBookRepository guestBookRepository;
+
+    public List<GuestBook> findAllEntries() {
+        return this.guestBookRepository.findAll();
+    }
 }
