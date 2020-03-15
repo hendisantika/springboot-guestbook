@@ -3,6 +3,7 @@ package com.hendisantika.springbootguestbook.controller;
 import com.hendisantika.springbootguestbook.domain.GuestBook;
 import com.hendisantika.springbootguestbook.service.GuestBookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,9 +37,13 @@ public class GuestBookRestController {
         return this.guestBookService.findGuestBookEntryById(id);
     }
 
-
     @GetMapping("/user/{user}")
     public List<GuestBook> findGuestBookEntriesByUser(@PathVariable("user") String user) {
         return this.guestBookService.findGuestBookEntriesByUser(user);
+    }
+
+    @DeleteMapping("/comment/{id}")
+    public void deleteGuestBookEntryById(@PathVariable("id") Integer id) {
+        this.guestBookService.deleteGuestBookEntryById(id);
     }
 }
