@@ -65,4 +65,14 @@ public class GuestBookWebController {
             return GUESTBOOK_TEMPLATE;
         }
     }
+
+    @GetMapping("update/{id}")
+    public String editComment(Model model, @PathVariable Integer id) {
+
+        model.addAttribute(GUESTBOOK_FORM_HEADER_ID, "Please Change the Comment");
+        model.addAttribute(ENTRIES_TEMPLATE_ID, this.guestBookService.findAllEntries());
+        model.addAttribute(NEW_ENTRY_TEMPLATE_ID, this.guestBookService.findGuestBookEntryById(id));
+
+        return GUESTBOOK_TEMPLATE;
+    }
 }
