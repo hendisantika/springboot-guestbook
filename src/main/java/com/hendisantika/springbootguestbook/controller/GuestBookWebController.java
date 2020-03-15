@@ -5,8 +5,13 @@ import com.hendisantika.springbootguestbook.service.GuestBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
 
 /**
  * Created by IntelliJ IDEA.
@@ -44,5 +49,20 @@ public class GuestBookWebController {
         this.guestBookService.deleteGuestBookEntryById(id);
 
         return HOMEPAGE_REDIRECT;
+    }
+
+    @PostMapping("/")
+    public String addComment(Model model,
+                             @Valid @ModelAttribute(NEW_ENTRY_TEMPLATE_ID) GuestBook newEntry,
+                             BindingResult bindingResult) {
+
+        if (!bindingResult.hasErrors()) {
+            this.guestBookService.save(newEntry);
+            return HOMEPAGE_REDIRECT;
+        } else {
+            model.addAttribute(GUESTBOOK_FORM_HEADER_ID, "Please Correct the Comment");
+            model.addAttribute(ENTRIES_TEMPLATE_ID, this.guestBookService.findAllEntries());
+            return GUESTBOOK_TEMPLATE;
+        }
     }
 }
