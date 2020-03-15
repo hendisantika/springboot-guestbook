@@ -36,4 +36,8 @@ public class GuestBookService {
     public void deleteGuestBookEntryById(Integer id) {
         this.guestBookRepository.deleteGuestBookEntryById(id);
     }
+
+    public void save(GuestBook newEntry) {
+        this.guestBookRepository.save(newEntry);
+    }
 }
