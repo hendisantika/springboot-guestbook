@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -36,5 +37,12 @@ public class GuestBookWebController {
         model.addAttribute(NEW_ENTRY_TEMPLATE_ID, new GuestBook());
 
         return GUESTBOOK_TEMPLATE;
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteComment(@PathVariable Integer id) {
+        this.guestBookService.deleteGuestBookEntryById(id);
+
+        return HOMEPAGE_REDIRECT;
     }
 }
