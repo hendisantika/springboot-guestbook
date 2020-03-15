@@ -53,4 +53,9 @@ public class GuestBookRestController {
     public void addComment(@RequestBody GuestBook guestBookEntry) {
         this.guestBookService.save(guestBookEntry);
     }
+
+    @PostMapping("/update")
+    public void updateComment(@RequestBody GuestBook guestBookEntry) {
+        this.guestBookService.save(guestBookEntry);
+    }
 }
